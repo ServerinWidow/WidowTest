@@ -10,13 +10,13 @@ public class MyEditorScript : MonoBehaviour
 	static string[] SCENES = FindEnabledEditorScenes();
 
 	static string APP_NAME = "Testeo";
-	static string TARGET_DIR = "target";
+	static string TARGET_DIR = "C:/Main/Builds/Builds Windows/Testeo Widow Build";
 
 	[MenuItem ("Custom/CI/Build Widows")]
 	static void PerformWindowsBuild ()
 	{
 		 string target_dir = APP_NAME + ".exe";
-		 GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
+		 GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows, BuildOptions.None);
 	}
 
 	private static string[] FindEnabledEditorScenes() {
@@ -32,7 +32,7 @@ public class MyEditorScript : MonoBehaviour
 	static void GenericBuild(string[] scenes, string target_dir, BuildTarget build_target, BuildOptions build_options)
 	{
 		EditorUserBuildSettings.SwitchActiveBuildTarget(build_target);
-		string res = BuildPipeline.BuildPlayer(scenes,target_dir,build_target,build_options);
+		string res = BuildPipeline.BuildPlayer(scenes,target_dir, build_target, build_options);
 		if (res.Length > 0) 
 		{
 			throw new Exception("BuildPlayer failure: " + res);
