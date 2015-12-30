@@ -15,7 +15,7 @@ public class MyEditorScript : MonoBehaviour
 	[MenuItem ("Custom/CI/Build Widows")]
 	static void PerformWindowsBuild ()
 	{
-		 string target_dir = APP_NAME + ".app";
+		 string target_dir = APP_NAME + ".exe";
 		 GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
 	}
 
