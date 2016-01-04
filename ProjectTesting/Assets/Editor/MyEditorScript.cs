@@ -11,6 +11,7 @@ public class MyEditorScript : MonoBehaviour
 
 	static string APP_NAME = "Testeo";
 	static string TARGET_DIR = "C:/Main/Builds/Builds Windows/Testeo Widow Build";
+	static string TARGET_DIR_ANDROID = "C:/Main/Builds/Builds Windows/Testeo Widow Build Android";
 
 	[MenuItem ("Custom/CI/Build Widows")]
 	static void PerformWindowsBuild ()
@@ -19,6 +20,13 @@ public class MyEditorScript : MonoBehaviour
 		 GenericBuild(SCENES, TARGET_DIR + "/" + target_dir, BuildTarget.StandaloneWindows, BuildOptions.None);
 	}
 
+	[MenuItem ("Custom/CI/Build Android")]
+	static void PerformAndroidBuild ()
+	{
+		 string target_dir = APP_NAME + ".apk";
+		 GenericBuild(SCENES, TARGET_DIR_ANDROID + "/" + target_dir, BuildTarget.Android, BuildOptions.None);
+	}
+	
 	private static string[] FindEnabledEditorScenes() {
 		List<string> EditorScenes = new List<string>();
 		foreach(EditorBuildSettingsScene scene in EditorBuildSettings.scenes) 
