@@ -11,7 +11,7 @@ public class MyEditorScript : MonoBehaviour
 
 	static string APP_NAME = "Testeo";
 	static string TARGET_DIR = "C:/Main/Builds/Builds Windows/Testeo Widow Build";
-	static string TARGET_DIR_ANDROID = "C:/Main/Builds/Builds Windows/Testeo Widow Build Android";
+	static string TARGET_DIR_ANDROID = "C:/Main/Builds/Builds Windows/";
 
 	[MenuItem ("Custom/CI/Build Widows")]
 	static void PerformWindowsBuild ()
