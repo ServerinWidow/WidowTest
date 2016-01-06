@@ -49,7 +49,7 @@ public class MyEditorScript : MonoBehaviour
 
     static void GetCmdLineArguments()
     {
-        // unity -quit MyEditorScript.Run   ...    -args gameType:MEMORAMA,IOS:true
+        // unity -quit MyEditorScript.Run   ...    -args gameType=MEMORAMA,IOS=true
         string cmdLine = System.Environment.CommandLine;
 
         DebugOn = cmdLine.Contains("-debug");
@@ -65,7 +65,7 @@ public class MyEditorScript : MonoBehaviour
 
             foreach (string tupla in tuplas)
             {
-                Arguments.Add(tupla.Split(':')[0].TrimEnd().TrimStart().ToLower(), tupla.Split(':')[1].TrimEnd().TrimStart().ToLower());
+                Arguments.Add(tupla.Split('=')[0].TrimEnd().TrimStart().ToLower(), tupla.Split('=')[1].TrimEnd().TrimStart().ToLower());
             }
         }
 
@@ -84,11 +84,13 @@ public class MyEditorScript : MonoBehaviour
         if (Arguments.ContainsKey("defines"))
         {
             string[] defines = Arguments["defines"].Split(';');
+            DebugLog("DEFINES");
             foreach (string define in defines)
             {
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, define);
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, define);
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, define);
+                DebugLog(define + ", ");
             }
         }
     }
@@ -116,6 +118,6 @@ public class MyEditorScript : MonoBehaviour
     static void DebugLog(object p)
     {
         if (DebugOn)
-            Debug.Log(p + "\n");
+            Debug.Log("XXXXXXXXXXX " + p + "\n");
     }
 }
