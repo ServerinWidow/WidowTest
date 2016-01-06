@@ -7,10 +7,12 @@ using UnityEditor.UI;
 public class MyEditorScript : MonoBehaviour
 {
     private static bool DebugOn;
-    static string[] Scenes = FindEnabledEditorScenes();
+    private static string[] Scenes = FindEnabledEditorScenes();
 
-    static string GameName = "Testeo";
-    static string TargetDir = "C:/";
+    private static string GameName = "Testeo";
+    private static string TargetDir = "C:/";
+    private static string ProjectWorkspace = "C:/";
+
     private static string platform = "android";
 
     private static Dictionary<string, BuildTarget> BuildPlatforms = new Dictionary<string, BuildTarget>();
@@ -39,9 +41,10 @@ public class MyEditorScript : MonoBehaviour
         string target_dir = GameName + Extensions[platform];
         DebugLog("target_dir: " + target_dir);
         DebugLog("BuildPlatforms[platform]: " + BuildPlatforms[platform]);
+        DebugLog("workspace: " + ProjectWorkspace);
 
 
-        GenericBuild(Scenes, TargetDir + "/" + target_dir, BuildPlatforms[platform], BuildOptions.None);
+        //GenericBuild(Scenes, TargetDir + "/" + target_dir, BuildPlatforms[platform], BuildOptions.None);
     }
 
     static void GetCmdLineArguments()
@@ -76,6 +79,7 @@ public class MyEditorScript : MonoBehaviour
     static void SetBuildSpecifics()
     {
         platform = Arguments.ContainsKey("platform") ? Arguments["platform"] : platform;
+        ProjectWorkspace = Arguments.ContainsKey("workspace") ? Arguments["workspace"] : ProjectWorkspace;
 
     }
 
