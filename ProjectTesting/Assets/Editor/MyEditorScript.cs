@@ -80,7 +80,17 @@ public class MyEditorScript : MonoBehaviour
     {
         platform = Arguments.ContainsKey("platform") ? Arguments["platform"] : platform;
         ProjectWorkspace = Arguments.ContainsKey("workspace") ? Arguments["workspace"] : ProjectWorkspace;
-
+        GameName = Arguments.ContainsKey("game") ? Arguments["game"] : GameName;
+        if (Arguments.ContainsKey("defines"))
+        {
+            string[] defines = Arguments["defines"].Split(';');
+            foreach (string define in defines)
+            {
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, define);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, define);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, define);
+            }
+        }
     }
 
     private static string[] FindEnabledEditorScenes()
