@@ -77,12 +77,12 @@ public class MyEditorScript : MonoBehaviour
 
     static void SetBuildSpecifics()
     {
-        platform = Arguments.ContainsKey("platform") ? Arguments["platform"] : platform;
-        ProjectWorkspace = Arguments.ContainsKey("workspace") ? Arguments["workspace"] : ProjectWorkspace;
-        GameName = Arguments.ContainsKey("game") ? Arguments["game"] : GameName;
-        if (Arguments.ContainsKey("defines"))
+        platform = Arguments.ContainsKey("PLATFORM") ? Arguments["PLATFORM"] : platform;
+        ProjectWorkspace = Arguments.ContainsKey("WORKSPACE") ? Arguments["WORKSPACE"] : ProjectWorkspace;
+        GameName = Arguments.ContainsKey("GAME") ? Arguments["GAME"] : GameName;
+        if (Arguments.ContainsKey("DEFINES"))
         {
-            string[] defines = Arguments["defines"].Split(';');
+            string[] defines = Arguments["DEFINES"].Split(';');
             DebugLog("DEFINES");
             foreach (string define in defines)
             {
