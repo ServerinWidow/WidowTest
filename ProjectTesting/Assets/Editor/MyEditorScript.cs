@@ -10,7 +10,6 @@ public class MyEditorScript : MonoBehaviour
     private static string[] Scenes = FindEnabledEditorScenes();
 
     private static string GameName = "Testeo";
-    private static string TargetDir = "C:/";
     private static string ProjectWorkspace = "C:/";
 
     private static string platform = "android";
@@ -38,13 +37,13 @@ public class MyEditorScript : MonoBehaviour
         GetCmdLineArguments();
         SetBuildSpecifics();
 
-        string target_dir = GameName + Extensions[platform];
-        DebugLog("target_dir: " + target_dir);
+        string buildName = GameName + Extensions[platform];
+        DebugLog("target_dir: " + buildName);
         DebugLog("BuildPlatforms[platform]: " + BuildPlatforms[platform]);
         DebugLog("workspace: " + ProjectWorkspace);
 
 
-        //GenericBuild(Scenes, TargetDir + "/" + target_dir, BuildPlatforms[platform], BuildOptions.None);
+        GenericBuild(Scenes, ProjectWorkspace + "/" + buildName, BuildPlatforms[platform], BuildOptions.None);
     }
 
     static void GetCmdLineArguments()
@@ -65,7 +64,7 @@ public class MyEditorScript : MonoBehaviour
 
             foreach (string tupla in tuplas)
             {
-                Arguments.Add(tupla.Split('=')[0].TrimEnd().TrimStart().ToLower(), tupla.Split('=')[1].TrimEnd().TrimStart().ToLower());
+                Arguments.Add(tupla.Split('=')[0].TrimEnd().TrimStart(), tupla.Split('=')[1].TrimEnd().TrimStart());
             }
         }
 
