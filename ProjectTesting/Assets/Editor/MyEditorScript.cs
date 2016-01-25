@@ -10,7 +10,7 @@ public class MyEditorScript : MonoBehaviour
     private static string[] Scenes = FindEnabledEditorScenes();
 
     private static string GameName = "Testeo";
-    private static string ProjectWorkspace = "C:/";
+	private static string ProjectWorkspace = "/Users/Shared/Jenkins/Home/jobs/";
 
     private static string platform = "android";
 
@@ -22,10 +22,12 @@ public class MyEditorScript : MonoBehaviour
     {
         BuildPlatforms.Add("android", BuildTarget.Android);
         BuildPlatforms.Add("pc", BuildTarget.StandaloneWindows);
+		BuildPlatforms.Add("osx", BuildTarget.StandaloneOSXIntel);
         BuildPlatforms.Add("ios", BuildTarget.iOS);
 
         Extensions.Add("android", ".apk");
         Extensions.Add("pc", ".exe");
+		Extensions.Add("osx", ".app");
         Extensions.Add("ios", ".xcode");
     }
 
@@ -80,18 +82,25 @@ public class MyEditorScript : MonoBehaviour
         platform = Arguments.ContainsKey("PLATFORM") ? Arguments["PLATFORM"] : platform;
         ProjectWorkspace = Arguments.ContainsKey("WORKSPACE") ? Arguments["WORKSPACE"] : ProjectWorkspace;
         GameName = Arguments.ContainsKey("GAME") ? Arguments["GAME"] : GameName;
-        if (Arguments.ContainsKey("DEFINES"))
+        
+
+		if (Arguments.ContainsKey("DEFINES"))
         {
             string[] defines = Arguments["DEFINES"].Split(';');
-            DebugLog("DEFINES");
+            DebugLog("DEFINES: " + defines.ToString());
             foreach (string define in defines)
             {
+
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, define);
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Standalone, define);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.StandaloneWindows, define);
+				PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.StandaloneOSXIntel, define);
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, define);
                 DebugLog(define + ", ");
             }
+
+
         }
+
     }
 
     private static string[] FindEnabledEditorScenes()
