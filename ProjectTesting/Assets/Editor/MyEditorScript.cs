@@ -30,7 +30,6 @@ public class MyEditorScript : MonoBehaviour
 		Extensions.Add("android", ".apk");
 		Extensions.Add("pc", ".exe");
 		Extensions.Add("osx", ".app");
-		Extensions.Add("ios", ".xcode");
 	}
 	
 	[MenuItem(("Custom/CI/Run"))]
@@ -41,13 +40,11 @@ public class MyEditorScript : MonoBehaviour
 		GetCmdLineArguments();
 		SetBuildSpecifics();
 		
-		string buildName = GameName + Extensions[platform];
+		try { string buildName = GameName + Extensions[platform]; }
+		catch { string buildName = "/XCodeProject/"; }
 		DebugLog("target_dir: " + buildName);
-		DebugLog("BuildPlatforms[platform]: " + BuildPlatforms[platform]);
-		DebugLog("workspace: " + ProjectWorkspace);
-		
-		
-		GenericBuild(Scenes, ProjectWorkspace + "/" + buildName, BuildPlatforms[platform], BuildOptions.None);
+
+		GenericBuild(Scenes, ProjectWorkspace + "/target/" + buildName, BuildPlatforms[platform], BuildOptions.None);
 	}
 	
 	static void GetCmdLineArguments()
