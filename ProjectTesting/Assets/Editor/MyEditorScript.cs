@@ -42,10 +42,10 @@ public class MyEditorScript : MonoBehaviour
 		
 		string buildName;
 		try { buildName = GameName + Extensions[platform]; }
-		catch (Exception e) { buildName = "/XCodeProject/"; }
+		catch (Exception e) { buildName = "/output/XCodeProject/"; }
 		DebugLog("target_dir: " + buildName);
 
-		GenericBuild(Scenes, ProjectWorkspace + "/build" + buildName, BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
+		GenericBuild(Scenes, ProjectWorkspace + buildName, BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
 	}
 	
 	static void GetCmdLineArguments()
