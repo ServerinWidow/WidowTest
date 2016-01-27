@@ -45,7 +45,7 @@ public class MyEditorScript : MonoBehaviour
 		catch (Exception e) { buildName = "XCodeProject/"; }
 		DebugLog("target_dir: " + buildName);
 
-		GenericBuild(Scenes, "../../target/" + buildName, BuildPlatforms[platform], BuildOptions.None);
+		GenericBuild(Scenes, ProjectWorkspace + "/target/" + buildName, BuildPlatforms[platform], BuildOptions.None);
 	}
 	
 	static void GetCmdLineArguments()
