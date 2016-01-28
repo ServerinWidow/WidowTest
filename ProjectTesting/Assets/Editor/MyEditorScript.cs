@@ -12,7 +12,7 @@ public class MyEditorScript : MonoBehaviour
 	private static string[] Scenes = FindEnabledEditorScenes();
 	
 	private static string GameName = "Testeo";
-	private static string ProjectWorkspace = "/Users/Shared/Jenkins/Home/jobs/";
+	private static string ProjectWorkspace = "/Users/Shared/Jenkins/Home/jobs/default";
 	
 	private static string platform = "android";
 	
@@ -42,10 +42,10 @@ public class MyEditorScript : MonoBehaviour
 		
 		string buildName;
 		try { buildName = GameName + Extensions[platform]; }
-		catch (Exception e) { buildName = "/iOS/"; }
+		catch (Exception e) { buildName = "XCodeProject/"; }
 		DebugLog("target_dir: " + buildName);
 
-		GenericBuild(Scenes, ProjectWorkspace + buildName, BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
+		GenericBuild(Scenes, ProjectWorkspace + "/target/" + buildName, BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
 	}
 	
 	static void GetCmdLineArguments()
