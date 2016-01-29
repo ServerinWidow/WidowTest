@@ -42,9 +42,10 @@ public class CIEditorScript : MonoBehaviour
 		GetCmdLineArguments();
 		SetBuildSpecifics();
 
-		DebugLog("XXXXXXXXXXXXXXX  ---------- FINAL OUTPUT DIRECTORY ----------   XXXXXXXXXXXXXXX: " + BuildOutputPath());
+		//GenericBuild(Scenes, BuildOutputPath(), BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
 
-		GenericBuild(Scenes, BuildOutputPath(), BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
+		GenericBuild(Scenes, BuildOutputPath(), BuildPlatforms[platform], BuildOptions.None);
+
 	}
 
 	private static string BuildOutputPath() {
