@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System;
 using UnityEditor.UI;
 
-public class MyEditorScript : MonoBehaviour
+public class CIEditorScript : MonoBehaviour
 {
 	private static bool DebugOn;
 	private static string[] Scenes = FindEnabledEditorScenes();
 	
-	private static string GameName = "Testeo";
-	private static string ProjectWorkspace = "/Users/Shared/Jenkins/Home/jobs/default";
-	
+	private static string GameName = "TestGame";
+	private static string ProjectWorkspace = "/Users/Shared/Jenkins/Home/jobs/TestProject";
 	private static string platform = "android";
+	private static string TargetDir = "target/";	// Relative to ${WORKSPACE} Jenkins Enviroment Variable
 	
 	private static Dictionary<string, BuildTarget> BuildPlatforms = new Dictionary<string, BuildTarget>();
 	private static Dictionary<string, string> Extensions = new Dictionary<string, string>();
@@ -30,6 +30,8 @@ public class MyEditorScript : MonoBehaviour
 		Extensions.Add("android", ".apk");
 		Extensions.Add("pc", ".exe");
 		Extensions.Add("osx", ".app");
+		Extensions.Add("ios", "XCodeProject");
+
 	}
 	
 	[MenuItem(("Custom/CI/Run"))]
@@ -39,13 +41,14 @@ public class MyEditorScript : MonoBehaviour
 		
 		GetCmdLineArguments();
 		SetBuildSpecifics();
-		
-		string buildName;
-		try { buildName = GameName + Extensions[platform]; }
-		catch (Exception e) { buildName = "XCodeProject"; }
-		DebugLog("target_dir: " + buildName);
 
-		GenericBuild(Scenes, ProjectWorkspace + "/" + buildName, BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
+		DebugLog("XXXXXXXXXXXXXXX  ---------- FINAL OUTPUT DIRECTORY ----------   XXXXXXXXXXXXXXX: " + BuildOutputPath());
+
+		GenericBuild(Scenes, BuildOutputPath(), BuildPlatforms[platform], BuildOptions.AcceptExternalModificationsToPlayer);
+	}
+
+	private static string BuildOutputPath() {
+		return ProjectWorkspace + "/" + TargetDir + Extensions[platform];
 	}
 	
 	static void GetCmdLineArguments()
@@ -82,7 +85,7 @@ public class MyEditorScript : MonoBehaviour
 		platform = Arguments.ContainsKey("PLATFORM") ? Arguments["PLATFORM"] : platform;
 		ProjectWorkspace = Arguments.ContainsKey("WORKSPACE") ? Arguments["WORKSPACE"] : ProjectWorkspace;
 		GameName = Arguments.ContainsKey("GAME") ? Arguments["GAME"] : GameName;
-		
+		GameName = Arguments.ContainsKey("TARGET_DIR") ? Arguments["TARGET_DIR"] : GameName;
 		
 		if (Arguments.ContainsKey("DEFINES"))
 		{
