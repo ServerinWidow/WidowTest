@@ -85,7 +85,7 @@ public class CIEditorScript : MonoBehaviour
 		platform = Arguments.ContainsKey("PLATFORM") ? Arguments["PLATFORM"] : platform;
 		ProjectWorkspace = Arguments.ContainsKey("WORKSPACE") ? Arguments["WORKSPACE"] : ProjectWorkspace;
 		GameName = Arguments.ContainsKey("GAME") ? Arguments["GAME"] : GameName;
-		GameName = Arguments.ContainsKey("TARGET_DIR") ? Arguments["TARGET_DIR"] : GameName;
+		TargetDir = Arguments.ContainsKey("TARGET_DIR") ? Arguments["TARGET_DIR"] : TargetDir;
 		
 		if (Arguments.ContainsKey("DEFINES"))
 		{
