@@ -30,7 +30,7 @@ public class CIEditorScript : MonoBehaviour
 		Extensions.Add("android", ".apk");
 		Extensions.Add("pc", ".exe");
 		Extensions.Add("osx", ".app");
-		Extensions.Add("ios", "XCodeProject");
+		Extensions.Add("ios", "/XCodeProject");
 
 	}
 	
